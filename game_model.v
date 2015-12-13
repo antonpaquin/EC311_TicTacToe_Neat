@@ -18,14 +18,15 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module game_model(X, O, C, writeEn, reset);
-	reg turn;
+module game_model(clk, X, O, C, writeEn, reset);
+	input clk;
 	input[8:0] C;
 	output reg[8:0] X, O;
 	input wire writeEn, reset;
 	reg in_en;
+	reg turn;
 	
-	always @(*) begin
+	always @(posedge clk) begin
 		if (reset) begin
 			X = 9'b000000000;
 			O = 9'b000000000;

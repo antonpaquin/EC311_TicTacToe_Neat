@@ -43,6 +43,6 @@ vgaReset, R, G, B, HS, VS
 	//(module for debouncing inputs here)
 	vga_display disp(vgaReset, clk, R, G, B, HS, VS, X, O, C);
 	controller cont(clk, leftButton, rightButton, upButton, downButton, centerButton, resetButton, C, writeEn);
-	game_model(X, O, C, writeEn, resetButton);
+	game_model(clk, X, O, C, writeEn, resetButton);
 	
 endmodule

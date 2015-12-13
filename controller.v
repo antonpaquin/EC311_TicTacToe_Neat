@@ -35,23 +35,22 @@ module controller(clk, buttonLeft, buttonRight, buttonUp, buttonDown, buttonCent
 		end else begin
 			state = nextState;
 		end
-	end
-
-	always @(buttonLeft or buttonRight or buttonUp or buttonDown) begin
+		
 		if (in_en & buttonLeft) begin
-			nextState = {cursor[6],cursor[8],cursor[7],cursor[3],cursor[5],cursor[4],cursor[0],cursor[2],cursor[1]};
+			nextState = {state[6],state[8],state[7],state[3],state[5],state[4],state[0],state[2],state[1]};
 			in_en = 0;
-		end else if (in_en & buttonRight) begin
-			nextState = {cursor[7],cursor[6],cursor[8],cursor[4],cursor[3],cursor[5],cursor[1],cursor[0],cursor[2]};
+		end else if (in_en &  buttonRight) begin
+			nextState = {state[7],state[6],state[8],state[4],state[3],state[5],state[1],state[0],state[2]};
 			in_en = 0;
 		end else if (in_en & buttonUp) begin
-			nextState = {cursor[2:0], cursor[8:6], cursor[5:3]};
+			nextState = {state[2:0], state[8:3]};
 			in_en = 0;
 		end else if (in_en & buttonDown) begin
-			nextState = {cursor[5:3], cursor[2:0], cursor[8:6]};
+			nextState = {state[5:0], state[8:6]};
 			in_en = 0;
-		end else if (~in_en & ~buttonDown & ~buttonUp & ~buttonRight & ~buttonLeft) begin
+		end else if (~in_en & ~buttonLeft & ~buttonRight & ~buttonUp & ~buttonDown) begin
 			in_en = 1;
+			nextState = state;
 		end else begin 
 			nextState = state;
 		end
