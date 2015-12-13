@@ -26,11 +26,14 @@ module game_model(clk, X, O, C, writeEn, reset);
 	reg in_en;
 	reg turn;
 	
+	//Logic modules
+	
 	always @(posedge clk) begin
 		if (reset) begin
 			X = 9'b000000000;
 			O = 9'b000000000;
 			turn = 0;
+		//end else if (react to logic modules) begin
 		end else if (in_en & writeEn) begin
 			turn = ~turn;
 			in_en = 0;
