@@ -1,0 +1,52 @@
+
+# PlanAhead Generated physical constraints 
+
+#NET "centerButton" LOC = B8;
+#NET "downButton" LOC = C9;
+#NET "leftButton" LOC = C4;
+#NET "rightButton" LOC = D9;
+#NET "upButton" LOC = A8;
+
+NET "centerButton" LOC = T10;
+NET "downButton" LOC = T9;
+NET "leftButton" LOC = V9;
+NET "rightButton" LOC = M8;
+NET "upButton" LOC = N8;
+NET "resetButton" LOC = T5;
+NET "resetButton" CLOCK_DEDICATED_ROUTE = TRUE;
+NET "vgaReset" LOC = V8;
+NET "clk" LOC = V10;
+#NET "AN[1]" LOC = N15;
+#NET "AN[2]" LOC = P18;
+#NET "AN[3]" LOC = P17;
+#NET "AN[0]" LOC = N16;
+#NET "hex[0]" LOC = L14;
+#NET "hex[1]" LOC = N14;
+#NET "hex[2]" LOC = M14;
+#NET "hex[3]" LOC = U18;
+#NET "hex[5]" LOC = T18;
+#NET "hex[6]" LOC = T17;
+#NET "hex[4]" LOC =U17;
+
+#NET "LEDs[0]" LOC = U16;
+#NET "LEDs[1]" LOC = V16;
+#NET "LEDs[2]" LOC = U15;
+#NET "LEDs[3]" LOC = V15;
+#NET "LEDs[4]" LOC = M11;
+#NET "LEDs[5]" LOC = N11;
+#NET "LEDs[6]" LOC = R11;
+#NET "LEDs[7]" LOC = T11;
+
+NET "B[0]" LOC = R7;
+NET "B[1]" LOC = T7;
+
+NET "G[0]" LOC = P8;
+NET "G[1]" LOC = T6;
+NET "G[2]" LOC = V6;
+
+NET "R[0]" LOC = U7;
+NET "R[1]" LOC = V7;
+NET "R[2]" LOC = N7;
+
+NET "HS" LOC = N6;
+NET "VS" LOC = P7;
