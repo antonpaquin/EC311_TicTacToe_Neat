@@ -20,7 +20,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 module TicTacToe(clk,
 upButton, downButton, leftButton, rightButton, centerButton, resetButton,
-vgaReset, R, G, B, HS, VS
+vgaReset, R, G, B, HS, VS,
+hex, AN
 );
 
 	//Board signals
@@ -35,6 +36,9 @@ vgaReset, R, G, B, HS, VS
 	output [1:0] B;
 	output HS, VS;
 	
+	output [6:0] hex;
+	output [3:0] AN;
+	
 	//Game variables
 	wire[8:0] X, O, C;
 	wire writeEn;
@@ -43,6 +47,6 @@ vgaReset, R, G, B, HS, VS
 	//(module for debouncing inputs here)
 	vga_display disp(vgaReset, clk, R, G, B, HS, VS, X, O, C);
 	controller cont(clk, leftButton, rightButton, upButton, downButton, centerButton, resetButton, C, writeEn);
-	game_model(clk, X, O, C, writeEn, resetButton);
+	game_model(clk, X, O, C, writeEn, resetButton, hex, AN);
 	
 endmodule

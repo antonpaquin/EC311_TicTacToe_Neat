@@ -34,4 +34,5 @@ module f3inrow(x, d);
 	(x[2]&&x[4]&&x[6])
 	);
 
+
 endmodule

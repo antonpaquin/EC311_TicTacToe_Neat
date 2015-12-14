@@ -25,6 +25,10 @@ module LED_display(big_bin, hex, AN, clk);
 	input clk;
 	wire [3:0] small_bin;
 	wire clock_out;
+	//reg [15:0] big_bin_test;
+	
+	//initial
+		//big_bin_test = 16'b1010000010110001;
 
 	
 	clock_divider_4 c1 (clock_out, clk);

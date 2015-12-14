@@ -26,10 +26,11 @@ initial //Initial block, used for correct simulations
 
 always @ (*)
 	case(bin)	
-		0:	 seven = 7'b1111111;
-		1:	 seven = 7'b1000000;	
+		0:	 seven = 7'b0000001;
+		1:	 seven = 7'b1001111;	
 		2:	 seven = 7'b0010010;
 		3:	 seven = 7'b0000110;
+		//
 		4:	 seven = 7'b1001100;
 		5:	 seven = 7'b0100100;
 		6:	 seven = 7'b0100000;
@@ -37,7 +38,7 @@ always @ (*)
 		8:	 seven = 7'b0000000;
 		9:	 seven = 7'b0000100;
 		10: seven = 7'b0001000;
-		11: seven = 7'b0011111;
+		11: seven = 7'b1100000;
 		12: seven = 7'b0110001;
 		13: seven = 7'b1000010;
 		14: seven = 7'b0110000;
