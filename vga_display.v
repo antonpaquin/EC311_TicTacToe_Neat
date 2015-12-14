@@ -18,17 +18,21 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module vga_display(rst, clk, R, G, B, HS, VS, xi, oi, cr);
+module vga_display(rst, clk, R, G, B, HS, VS, xi, oi, cr, go);
 	input rst;	// global reset
 	input clk;	// 100MHz clk
 	
-	input [8:0] xi;
-	input [8:0] oi;
-	input [8:0] cr;
+	input [8:0] xi; // X inputs
+	input [8:0] oi; // O inputs
+	input [8:0] cr; // Cursor
+	
+	input go; // game over enable
 	
 	// color outputs to show on display (current pixel)
 	output reg [2:0] R, G;
 	output reg [1:0] B;
+	wire[2:0] sR, sG;
+	wire[1:0] sB;
 	
 	// Synchronization signals
 	output HS;
@@ -49,7 +53,7 @@ module vga_display(rst, clk, R, G, B, HS, VS, xi, oi, cr);
 		clk_25Mhz <= count[N-1];
 	end
 	// End clock division
-	/////////////////////////////////////////////////////
+	///////////////////////////////////////////////////// 
 	
 	// Call driver
 	vga_controller_640_60 vc(
@@ -122,20 +126,42 @@ module vga_display(rst, clk, R, G, B, HS, VS, xi, oi, cr);
 	cfig cf9(h3, hcount, v3, vcount, cr[8], c9);
 	assign c=(c1|c2|c3|c4|c5|c6|c7|c8|c9);
 	
-	assign figure = ~blank &(line_v1 | line_v2 | line_h1 | line_h2 | x | o | c);
+	assign figure = ~blank & ~go &(line_v1 | line_v2 | line_h1 | line_h2 | x | o | c);
 	//assign figure = ~blank & (hcount >= 300 & hcount <= 500 & vcount >= 167 & vcount <= 367);
 	
+	wire[14:0] addra;
+	wire[7:0] douta;
+	vga_bsprite sprites_mem(
+		.x0(0+100), 
+		.y0(0+100),
+		.x1(343+100),
+		.y1(47+100),
+		.hc(hcount), 
+		.vc(vcount), 
+		.mem_value(douta), 
+		.rom_addr(addra), 
+		.R(sR), 
+		.G(sG), 
+		.B(sB), 
+		.blank(blank),
+		.en(go)
+	);
+	game_over_mem memory_1(
+		.clka(clk_25Mhz),
+		.addra(addra),
+		.douta(douta)
+	);
 	// send colors:
 	always @ (posedge clk) begin
-		if (figure) begin	// if you are within the valid region
+		if (figure & ~go) begin	// if you are within the valid region
 			R = 3'b111;
 			G = 3'b000;
 			B = 2'b00;
 		end
-		else begin	// if you are outside the valid region
-			R = 0;
-			G = 0;
-			B = 0;
+		else if (go) begin	// if you are outside the valid region
+			R = sR;
+			G = sG;
+			B = sB;
 		end
 	end
 
