@@ -48,7 +48,11 @@ module game_model(clk, X, O, C, writeEn, reset, gameOver, hex, AN);
 				turn = 1;
 				in_en = 0;
 				gameOver = 0;
-			//end else if (react to logic modules) begin
+				scorex = 0;
+				scoreo = 0;
+			end else if ((X | O) == 9'b111111111) begin
+				X = 9'b000000000;
+				O = 9'b000000000;
 			end else if (in_en & writeEn & ((C & (X | O)) == 9'b000000000)) begin
 				turn = ~turn;
 				in_en = 0;

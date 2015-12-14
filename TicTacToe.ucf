@@ -1,17 +1,17 @@
 
 # PlanAhead Generated physical constraints 
 
-#NET "centerButton" LOC = B8;
-#NET "downButton" LOC = C9;
-#NET "leftButton" LOC = C4;
-#NET "rightButton" LOC = D9;
-#NET "upButton" LOC = A8;
+NET "centerButton" LOC = B8;
+NET "downButton" LOC = C9;
+NET "leftButton" LOC = C4;
+NET "rightButton" LOC = D9;
+NET "upButton" LOC = A8;
 
-NET "centerButton" LOC = T10;
-NET "downButton" LOC = T9;
-NET "leftButton" LOC = M8;
-NET "rightButton" LOC = V9;
-NET "upButton" LOC = N8;
+#NET "centerButton" LOC = T10;
+#NET "downButton" LOC = T9;
+#NET "leftButton" LOC = M8;
+#NET "rightButton" LOC = V9;
+#NET "upButton" LOC = N8;
 NET "resetButton" LOC = T5;
 NET "resetButton" CLOCK_DEDICATED_ROUTE = TRUE;
 NET "vgaReset" LOC = V8;
