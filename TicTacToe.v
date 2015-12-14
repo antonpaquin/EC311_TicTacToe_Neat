@@ -47,6 +47,6 @@ hex, AN
 	//(module for debouncing inputs here)
 	vga_display disp(vgaReset, clk, R, G, B, HS, VS, X, O, C);
 	controller cont(clk, leftButton, rightButton, upButton, downButton, centerButton, resetButton, C, writeEn);
-	game_model(clk, X, O, C, writeEn, resetButton, hex, AN);
+	game_model m(clk, X, O, C, writeEn, resetButton, hex, AN);
 	
 endmodule

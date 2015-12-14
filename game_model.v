@@ -39,13 +39,15 @@ module game_model(clk, X, O, C, writeEn, reset, hex, AN);
 	LED_display led(big_bin, hex, AN, clk);
 
 	always @(posedge clk) begin
+		big_bin = {6'b101000, scorex, 6'b101100, scoreo};
 		if (~xwins & ~owins) begin
 			if (reset) begin
 				X = 9'b000000000;
 				O = 9'b000000000;
 				turn = 1;
+				in_en = 0;
 			//end else if (react to logic modules) begin
-			end else if (in_en & writeEn) begin
+			end else if (in_en & writeEn & ((C & (X | O)) == 9'b000000000)) begin
 				turn = ~turn;
 				in_en = 0;
 				if (turn == 0)
@@ -73,7 +75,6 @@ module game_model(clk, X, O, C, writeEn, reset, hex, AN);
 			turn = 1;
 			
 		end
-		big_bin = {6'b101000, scorex, 6'b101100, scoreo};
 	end
 
 endmodule
