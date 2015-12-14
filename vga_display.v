@@ -153,15 +153,25 @@ module vga_display(rst, clk, R, G, B, HS, VS, xi, oi, cr, go);
 	);
 	// send colors:
 	always @ (posedge clk) begin
-		if (figure & ~go) begin	// if you are within the valid region
-			R = 3'b111;
-			G = 3'b000;
-			B = 2'b00;
+		if (~go) begin	// if you are within the valid region
+			if (figure) begin
+				R = 3'b111;
+				G = 3'b000;
+				B = 2'b00;
+			end else begin
+				R = 3'b000;
+				G = 3'b000;
+				B = 2'b00;
+			end
 		end
 		else if (go) begin	// if you are outside the valid region
 			R = sR;
 			G = sG;
 			B = sB;
+		end else begin
+			R = 3'b000;
+			G = 3'b000;
+			B = 2'b00;
 		end
 	end
 

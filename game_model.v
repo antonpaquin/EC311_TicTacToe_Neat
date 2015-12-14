@@ -18,7 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module game_model(clk, X, O, C, writeEn, reset, hex, AN);
+module game_model(clk, X, O, C, writeEn, reset, gameOver, hex, AN);
 	input clk;
 	input[8:0] C;
 	output reg[8:0] X, O;
@@ -32,6 +32,7 @@ module game_model(clk, X, O, C, writeEn, reset, hex, AN);
 	reg [15:0] big_bin = 16'b1010000010110000;
 	output [6:0] hex;
 	output [3:0] AN;
+	output reg gameOver = 0;
 	
 	//Logic modules
 	f3inrow fX(X, xwins);
@@ -46,6 +47,7 @@ module game_model(clk, X, O, C, writeEn, reset, hex, AN);
 				O = 9'b000000000;
 				turn = 1;
 				in_en = 0;
+				gameOver = 0;
 			//end else if (react to logic modules) begin
 			end else if (in_en & writeEn & ((C & (X | O)) == 9'b000000000)) begin
 				turn = ~turn;
@@ -62,13 +64,16 @@ module game_model(clk, X, O, C, writeEn, reset, hex, AN);
 		else begin
 			if (scorex == 2'b00 & xwins)
 				scorex = 2'b01;
-			else if (scorex == 2'b01 & xwins)
+			else if (scorex == 2'b01 & xwins) begin
 				scorex = 2'b10;
+				gameOver = 1;
 				//Game Over
-			else if (scoreo == 2'b00 & owins)
+			end else if (scoreo == 2'b00 & owins)
 				scoreo = 2'b01;
-			else if (scoreo == 2'b01 & owins)
+			else if (scoreo == 2'b01 & owins) begin
 				scoreo = 2'b10;
+				gameOver = 1;
+			end
 				
 			X = 9'b000000000;
 			O = 9'b000000000;

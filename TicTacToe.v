@@ -42,11 +42,12 @@ hex, AN
 	//Game variables
 	wire[8:0] X, O, C;
 	wire writeEn;
+	wire gameOver;
 	
 	//Main modules
 	//(module for debouncing inputs here)
-	vga_display disp(vgaReset, clk, R, G, B, HS, VS, X, O, C);
+	vga_display disp(vgaReset, clk, R, G, B, HS, VS, X, O, C, gameOver);
 	controller cont(clk, leftButton, rightButton, upButton, downButton, centerButton, resetButton, C, writeEn);
-	game_model m(clk, X, O, C, writeEn, resetButton, hex, AN);
+	game_model m(clk, X, O, C, writeEn, resetButton, gameOver, hex, AN);
 	
 endmodule

@@ -50,6 +50,8 @@ module vga_bsprite(x0, y0, x1, y1, hc, vc, mem_value, rom_addr, R, G, B, blank, 
 				{R,G,B} = 8'd255;
 			else
 				{R,G,B} = mem_value;
+		end else begin
+			{R,G,B} = 8'd255;
 		end
 	end
 endmodule
